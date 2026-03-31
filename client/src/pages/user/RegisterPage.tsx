@@ -7,7 +7,12 @@ import { useAuth } from "../../context/AuthContext";
 export default function RegisterPage() {
   const { login } = useAuth();
   const navigate = useNavigate();
-  const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const [form, setForm] = useState({
+  name: "",
+  email: "",
+  password: "",
+  role: "USER", 
+});
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -76,6 +81,21 @@ export default function RegisterPage() {
               placeholder="At least 6 characters"
             />
           </div>
+          <div>
+  <label className="block text-sm font-medium text-gray-700 mb-1">
+    Role
+  </label>
+  <select
+    value={form.role}
+    onChange={(e) =>
+      setForm((f) => ({ ...f, role: e.target.value }))
+    }
+    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+  >
+    <option value="USER">User</option>
+    <option value="ADMIN">Admin</option>
+  </select>
+</div>
           <button
             type="submit"
             disabled={loading}
